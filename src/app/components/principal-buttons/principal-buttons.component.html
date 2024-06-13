@@ -1,0 +1,7 @@
+<button 
+    [ngStyle]="{'width':width, 'height': height}" 
+    [ngClass]="color === 'primary' ? 'btn-color-primary' : color === 'secondary' ? 'btn-color-secondary' : 'btn-color-tertiary'"
+    (click) = "emitEventWithArgs()"
+    class="btn">
+    {{ label }}
+</button>

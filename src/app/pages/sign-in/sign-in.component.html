@@ -1,0 +1,68 @@
+<div class="d-flex align-items-center">
+    <div class="row w-100">
+        <div class="col-6 d-flex ">
+             <img src="../../../assets/seller-img.jpg" class="img-fluid img-cropped" alt="">
+        </div>
+        <form class="col-6" [formGroup]="signInForm">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <h2 class="mb-5">Cadastrar Novo Vendedor</h2>
+                <div class="d-flex flex-column mb-3 w-50">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" formControlName="name">
+                    @if(signInForm.get('name').invalid && submitted){
+                        @if (signInForm.get('name').hasError('minlength')) {
+                            <span>O campo de nome deve possuir no mínimo 3 caractéres</span>
+                        }
+                        @if (signInForm.get('name').hasError('required')) {
+                            <span>O campo de nome não foi preenchido</span>
+                        }
+                    }
+                </div>
+                <div class="d-flex flex-column mb-3 w-50">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                    @if(signInForm.get('email').invalid && submitted){
+                        @if (signInForm.get('email').hasError('email')) {
+                            <span>O campo de email está inválido</span>
+                        }
+                        @if (signInForm.get('email').hasError('required')) {
+                            <span>O campo de email não foi preenchido</span>
+                        }
+                    }
+                </div>
+                <div class="d-flex flex-column mb-3 w-50">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" id="senha" formControlName="password">
+                    @if(signInForm.get('password').invalid && submitted){
+                        @if (signInForm.get('password').hasError('pattern')) {
+                            <span>O campo de senha deve possuir 6 a 8 caracteres e pelo menos uma letra maiúscula e um número</span>
+                        }
+                        @if (signInForm.get('password').hasError('required')) {
+                            <span>O campo de senha não foi preenchido</span>
+                        }
+                    }
+                </div>
+                <div class="d-flex flex-column mb-3 w-50">
+                    <label for="confirmacao">Confirmação da Senha</label>
+                    <input type="password" class="form-control" id="confirmacao" formControlName="confirmPassword">
+                    @if(signInForm.get('confirmPassword').invalid && submitted){
+                        @if (signInForm.get('confirmPassword').hasError('required')) {
+                            <span>O campo de confirme sua senha não foi preenchido</span>
+                        }
+                    }
+                    @if (signInForm.errors?.['passwordMismatch'] && signInForm.get('confirmPassword').touched) {
+                        <span>Os campos de senha e confirmação devem ser iguais</span>
+                    }
+                    <app-principal-buttons 
+                        class="mt-5"
+                        [width]="'150px'" 
+                        [height]="'50px'"
+                        [color]="'secondary'"
+                        [label]="'Cadastrar'"
+                        (sendEvent)="onSubmit()"
+                    ></app-principal-buttons>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
